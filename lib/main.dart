@@ -15,6 +15,7 @@ class WaroApp extends StatelessWidget {
     return MaterialApp(
       title: 'WARO Marketplace',
       theme: AppTheme.light,
+      darkTheme: AppTheme.dark,
       home: const FeedScreen(),
       debugShowCheckedModeBanner: false,
     );
