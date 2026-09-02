@@ -1,0 +1,31 @@
+issue: 5
+title: "feat(ui): restaurant public profile cards (header + product card) for marketplace feed"
+repo: waro_marketplace_app
+repo_remote: uno0uno/waro_marketplace_app
+cwd: /Users/saifer/Documents/WEBS/waro_marketplace_app
+stack: flutter
+branch: wr-5-public-cards
+paths:
+  - lib/features/feed/widgets/restaurant_card.dart
+  - lib/features/restaurant/widgets/restaurant_header.dart
+  - lib/features/restaurant/widgets/public_product_card.dart
+  - lib/features/feed/feed_screen.dart
+ac:
+  - RestaurantCard para feed con logo/nombre/estado/descripción usando AppColors
+  - RestaurantHeader banner+logo+badge fiel a front_nuxt
+  - PublicProductCard imagen/emoji+precio+badge fiel a front_nuxt
+  - Usa AppColors/Theme sin hardcode
+  - flutter analyze sin errores
+out_of_scope:
+  - carrito/order/modifiers lógica compleja
+hints:
+  entry: "lib/features/feed/feed_screen.dart"
+  pattern: "front_nuxt/components/public/RestaurantHeader.vue + PublicProductCard.vue"
+  tests: "flutter analyze; flutter test"
+risk:
+  sensitive: false
+  areas: []
+skip:
+  audits: []
+next:
+  after_pr: "gh issue edit 5 --add-label ready-for-review"
