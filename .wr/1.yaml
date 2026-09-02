@@ -1,0 +1,43 @@
+issue: 1
+title: "[Marketplace] Flutter desde cero — vitrina productos públicos (api.warolabs compartido)"
+repo: waro_marketplace_app
+repo_remote: uno0uno/waro_marketplace_app
+cwd: /Users/saifer/Documents/WEBS/waro_marketplace_app
+stack: flutter
+branch: wr-1-flutter-vitrina-v1
+
+paths:
+  - pubspec.yaml
+  - lib/main.dart
+  - lib/core/theme/app_theme.dart
+  - lib/core/config/api_config.dart
+  - lib/data/models/product.dart
+  - lib/data/api_client.dart
+  - lib/features/feed/feed_screen.dart
+  - lib/features/product/product_detail_screen.dart
+  - lib/widgets/product_card.dart
+  - analysis_options.yaml
+
+ac:
+  - flutter create estructura manual (sin SDK local) levanta con flutter pub get / flutter run cuando se instale SDK
+  - Feed lista productos (mock inicial + ApiClient listo para GET /products de api.warolabs)
+  - Detail muestra producto + modificadores + deep-link warocol.com
+  - Theme WARO y navegación básica
+
+out_of_scope:
+  - pagos, auth, moderación IA, ranking boost
+
+hints:
+  entry: "lib/main.dart"
+  pattern: "README.md:29-41 estructura planeada"
+  tests: "dart analyze (cuando SDK disponible); por ahora verificación sintáctica"
+
+risk:
+  sensitive: false
+  areas: []
+
+skip:
+  audits: []
+
+next:
+  after_pr: "Instalar Flutter SDK (docs.flutter.dev/get-started/install/macos) y ejecutar flutter pub get && flutter run"
