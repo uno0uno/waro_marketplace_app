@@ -1,0 +1,29 @@
+# Flutter / Dart
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+build/
+*.lock
+
+# iOS / macOS
+ios/Flutter/.last_build_id
+ios/Flutter/App.framework
+ios/Flutter/Flutter.framework
+**/Pods/
+**/.symlinks/
+
+# Android
+android/app/build/
+android/.gradle/
+*.keystore
+*.jks
+local.properties
+
+# Misc
+*.log
+.DS_Store
+.env
+.env.*
