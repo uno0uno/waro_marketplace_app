@@ -1,0 +1,31 @@
+issue: 7
+title: "feat(ui): header + footer mobile fiel a front_nuxt (LayoutHeader/Footer + BottomNav)"
+repo: waro_marketplace_app
+repo_remote: uno0uno/waro_marketplace_app
+cwd: /Users/saifer/Documents/WEBS/waro_marketplace_app
+stack: flutter
+branch: wr-7-header-footer-mobile
+paths:
+  - lib/widgets/app_header.dart
+  - lib/widgets/app_footer.dart
+  - lib/widgets/app_bottom_nav.dart
+  - lib/features/feed/feed_screen.dart
+ac:
+  - AppHeader fiel a Header.vue usando AppColors
+  - AppFooter fiel a Footer.vue
+  - AppBottomNav fiel a BottomNav.vue solo mobile
+  - Integrado en app con footer hidden en mobile si bottomNav visible
+  - flutter analyze sin errores
+out_of_scope:
+  - lógica auth real, i18n completo
+hints:
+  entry: "lib/features/feed/feed_screen.dart"
+  pattern: "front_nuxt/components/layout/Header.vue + Footer.vue + BottomNav.vue"
+  tests: "flutter analyze; flutter test"
+risk:
+  sensitive: false
+  areas: []
+skip:
+  audits: []
+next:
+  after_pr: "gh issue edit 7 --add-label ready-for-review"
