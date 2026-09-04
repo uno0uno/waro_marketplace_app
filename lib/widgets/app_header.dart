@@ -5,7 +5,9 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
   final bool isLoggedIn;
   final VoidCallback? onCreateAccount;
   final VoidCallback? onSignIn;
-  const AppHeader({super.key, this.isLoggedIn = false, this.onCreateAccount, this.onSignIn});
+  final VoidCallback? onHomeTap;
+  final VoidCallback? onCitiesTap;
+  const AppHeader({super.key, this.isLoggedIn = false, this.onCreateAccount, this.onSignIn, this.onHomeTap, this.onCitiesTap});
 
   @override
   Size get preferredSize => const Size.fromHeight(60);
@@ -33,9 +35,9 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
               ),
             if (isDesktop) ...[
               const SizedBox(width: 24),
-              _NavLink(label: 'Inicio', active: true),
-              _NavLink(label: 'Ciudades'),
-              _NavLink(label: 'Blog'),
+              _NavLink(label: 'Inicio', active: true, onTap: onHomeTap),
+              _NavLink(label: 'Ciudades', onTap: onCitiesTap),
+              const _NavLink(label: 'Blog'),
             ],
             const Spacer(),
             if (!compact) TextButton(onPressed: onSignIn, child: Text(isLoggedIn ? 'Mi Panel' : 'Ingresar', style: const TextStyle(fontSize: 11, color: AppColors.ebony600))),
@@ -55,14 +57,18 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
 class _NavLink extends StatelessWidget {
   final String label;
   final bool active;
-  const _NavLink({required this.label, this.active = false});
+  final VoidCallback? onTap;
+  const _NavLink({required this.label, this.active = false, this.onTap});
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return InkWell(
+      onTap: onTap,
+      child: Container(
       margin: const EdgeInsets.only(right: 4),
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
       decoration: BoxDecoration(color: active ? AppColors.crocus50 : Colors.transparent, borderRadius: BorderRadius.circular(10)),
       child: Text(label, style: TextStyle(fontSize: 13, fontWeight: active ? FontWeight.w600 : FontWeight.w500, color: active ? AppColors.crocus600 : AppColors.ebony500)),
+      ),
     );
   }
 }

@@ -26,6 +26,30 @@ flutter pub get
 flutter run
 ```
 
+## API environments (local vs prod)
+
+`ApiConfig.baseUrl` se resuelve en compilación vía `--dart-define=API_BASE_URL`
+(default: `https://api.warolabs.com` = prod).
+
+Backend local (`api_warocol.com`):
+
+```bash
+cd "/Users/saifer/Documents/WEBS/WARO COLOMBIA/api_warocol.com" && \
+./venv/bin/dotenv -f .env run -- \
+./venv/bin/python -m uvicorn app.main:app --host 0.0.0.0 --port 9999 --reload
+```
+
+App contra local:
+
+```bash
+flutter run -d macos --dart-define=API_BASE_URL=http://localhost:9999
+```
+
+O usa VS Code Run: **WARO Local (api :9999)** / **WARO Prod (api.warolabs.com)**
+(`.vscode/launch.json`). Nota: endpoints `/public/*` son públicos sin auth;
+si ves 403/404 revisa que el backend local esté arriba y sin prefijo `/api`
+(el proxy `/api` solo existe en `front_nuxt`, no en el backend directo).
+
 ## Planned structure
 
 ```
