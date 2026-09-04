@@ -5,7 +5,7 @@ class MenuCategory {
   final String name;
   final String? description;
 
-  MenuCategory({required this.id, required this.name, this.description});
+  const MenuCategory({required this.id, required this.name, this.description});
 
   factory MenuCategory.fromJson(Map<String, dynamic> j) => MenuCategory(
         id: j['id'].toString(),

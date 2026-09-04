@@ -1,0 +1,38 @@
+issue: 25
+title: "feat(restaurant): warocol-style profile header with search and categories"
+repo: waro_marketplace_app
+repo_remote: uno0uno/waro_marketplace_app
+cwd: /Users/saifer/Documents/WEBS/waro_marketplace_app
+stack: flutter
+branch: wr-25-profile-header
+
+paths:
+  - lib/data/models/restaurant.dart
+  - lib/widgets/restaurant_header.dart
+  - lib/features/restaurant/restaurant_detail_screen.dart
+  - lib/data/models/menu_data.dart
+  - lib/widgets/product_card.dart
+
+ac:
+  - Header banner + logo superpuesto + badges + contacto + horarios
+  - Buscador sticky + pills Todos/categorias con conteo
+  - Secciones por categoria, banners de estado, vacio de busqueda
+  - Sin regresion en resto del flujo, entorno, login
+
+out_of_scope:
+  - carrito, checkout, drawer producto, pedidos, cambios API y front_nuxt
+
+hints:
+  entry: "RestaurantDetailScreen CustomScrollView + slivers"
+  pattern: "front_nuxt RestaurantHeader.vue + PublicMenu.vue:1-30"
+  tests: "flutter analyze + flutter test"
+
+risk:
+  sensitive: false
+  areas: []
+
+skip:
+  audits: []
+
+next:
+  after_pr: "/wr-fast #25 review"
