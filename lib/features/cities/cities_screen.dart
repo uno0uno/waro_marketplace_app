@@ -5,6 +5,7 @@ import '../../data/models/city.dart';
 import '../../widgets/app_header.dart';
 import '../../widgets/app_bottom_nav.dart';
 import '../feed/feed_screen.dart';
+import 'city_restaurants_screen.dart';
 
 final citiesProvider = FutureProvider<List<City>>((ref) => ref.watch(apiClientProvider).fetchCities());
 
@@ -39,6 +40,10 @@ class CitiesScreen extends ConsumerWidget {
                   leading: const Icon(Icons.location_on_outlined),
                   title: Text(cities[i].name),
                   subtitle: Text(cities[i].slug),
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => CityRestaurantsScreen(city: cities[i])),
+                  ),
                 ),
               ),
       ),
