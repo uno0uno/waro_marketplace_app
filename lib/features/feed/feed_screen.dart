@@ -6,6 +6,7 @@ import '../../widgets/product_card.dart';
 import '../../widgets/app_header.dart';
 import '../../widgets/app_footer.dart';
 import '../../widgets/app_bottom_nav.dart';
+import '../../widgets/matrix_loader.dart';
 import '../product/product_detail_screen.dart';
 import '../cities/cities_screen.dart';
 
@@ -34,7 +35,7 @@ class FeedScreen extends ConsumerWidget {
         },
       ),
       body: async.when(
-        loading: () => const Center(child: CircularProgressIndicator()),
+        loading: () => const MatrixLoader(),
         error: (e, _) => Center(child: Text('Error: $e')),
         data: (products) => SingleChildScrollView(
           child: Column(

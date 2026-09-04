@@ -6,6 +6,7 @@ class Product {
   final String? imageUrl;
   final String? tenantName;
   final List<ModifierGroup> modifierGroups;
+  final bool isAvailable;
 
   Product({
     required this.id,
@@ -15,6 +16,7 @@ class Product {
     this.imageUrl,
     this.tenantName,
     this.modifierGroups = const [],
+    this.isAvailable = true,
   });
 
   factory Product.fromJson(Map<String, dynamic> j) => Product(
@@ -24,6 +26,7 @@ class Product {
         price: (j['price'] as num?)?.toDouble() ?? 0,
         imageUrl: j['image_url'] ?? j['imageUrl'],
         tenantName: j['tenant_name'] ?? j['tenantName'],
+        isAvailable: j['is_available'] ?? j['isAvailable'] ?? true,
         modifierGroups: (j['modifier_groups'] as List?)
                 ?.map((e) => ModifierGroup.fromJson(e))
                 .toList() ??

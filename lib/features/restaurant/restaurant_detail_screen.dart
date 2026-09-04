@@ -6,6 +6,7 @@ import '../../data/models/product.dart';
 import '../../data/models/restaurant.dart';
 import '../../widgets/app_header.dart';
 import '../../widgets/app_bottom_nav.dart';
+import '../../widgets/matrix_loader.dart';
 import '../../widgets/product_card.dart';
 import '../feed/feed_screen.dart';
 import '../product/product_detail_screen.dart';
@@ -55,7 +56,7 @@ class RestaurantDetailScreen extends ConsumerWidget {
         },
       ),
       body: async.when(
-        loading: () => const Center(child: CircularProgressIndicator()),
+        loading: () => const MatrixLoader(),
         error: (e, _) => Center(
           child: Column(
             mainAxisSize: MainAxisSize.min,

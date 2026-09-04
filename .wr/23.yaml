@@ -1,0 +1,41 @@
+issue: 23
+title: "feat(ui): front_nuxt product cards and matrix loader parity"
+repo: waro_marketplace_app
+repo_remote: uno0uno/waro_marketplace_app
+cwd: /Users/saifer/Documents/WEBS/waro_marketplace_app
+stack: flutter
+branch: wr-23-matrix-ui
+
+paths:
+  - lib/widgets/matrix_loader.dart
+  - lib/widgets/product_card.dart
+  - lib/widgets/restaurant_card.dart
+  - lib/data/models/product.dart
+  - lib/features/feed/feed_screen.dart
+  - lib/features/cities/cities_screen.dart
+  - lib/features/cities/city_restaurants_screen.dart
+  - lib/features/restaurant/restaurant_detail_screen.dart
+
+ac:
+  - MatrixLoader 1/0 crocus + frases en las 4 pantallas
+  - ProductCard paridad PublicMenu con precio COP y badge no-disponible
+  - Fotos renderizan o fallback visible + debugPrint del motivo
+  - Sin regresion en nav, entorno local/prod, login
+
+out_of_scope:
+  - carrito, drawer detalle, checkout, cambios API y front_nuxt
+
+hints:
+  entry: "loading: () => MatrixLoader()"
+  pattern: "front_nuxt TheCustomLoader.vue:34-44 + useLoadingPhrases"
+  tests: "flutter analyze + flutter test"
+
+risk:
+  sensitive: false
+  areas: []
+
+skip:
+  audits: []
+
+next:
+  after_pr: "/wr-fast #23 review"
