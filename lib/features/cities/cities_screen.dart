@@ -39,6 +39,7 @@ class CitiesScreen extends ConsumerWidget {
                   leading: const Icon(Icons.location_on_outlined),
                   title: Text(cities[i].name),
                   subtitle: Text(cities[i].slug),
+                  trailing: Text('${cities[i].tenantCount}'),
                 ),
               ),
       ),

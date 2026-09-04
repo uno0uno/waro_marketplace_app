@@ -1,0 +1,36 @@
+issue: 16
+title: "fix(cities): list only cities with active tenants by default"
+repo: waro_marketplace_app
+repo_remote: uno0uno/waro_marketplace_app
+cwd: /Users/saifer/Documents/WEBS/waro_marketplace_app
+stack: flutter
+branch: wr-16-cities-tenants
+
+paths:
+  - lib/data/api_client.dart
+  - lib/data/models/city.dart
+  - lib/features/cities/cities_screen.dart
+
+ac:
+  - CitiesScreen muestra solo ciudades con tenant_count > 0 por defecto
+  - Cada fila muestra el conteo de restaurantes
+  - Vacio/error siguen mostrando etiqueta de entorno
+  - Sin regresion en nav, entorno local/prod, productos, login
+
+out_of_scope:
+  - buscador, detalle ciudad, mapa, cambios API y front_nuxt
+
+hints:
+  entry: "fetchCities({countryCode, includeEmpty})"
+  pattern: "api public_restaurant_service.py:866,932 + front_nuxt useCityCatalog.ts:155"
+  tests: "flutter analyze + flutter test"
+
+risk:
+  sensitive: false
+  areas: []
+
+skip:
+  audits: []
+
+next:
+  after_pr: "/wr-fast #16 review"
