@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../core/config/api_config.dart';
 import 'models/city.dart';
+import 'models/menu_data.dart';
 import 'models/product.dart';
 import 'models/restaurant.dart';
 
@@ -45,6 +46,26 @@ class ApiClient {
       return list.map((e) => Restaurant.fromJson(e as Map<String, dynamic>)).toList();
     }
     throw Exception('Restaurantes (${ApiConfig.environment}): HTTP ${res.statusCode}');
+  }
+
+  Future<Restaurant> fetchProfile(String slug) async {
+    final res = await _http.get(Uri.parse('${ApiConfig.baseUrl}${ApiConfig.restaurantsPath}/$slug'));
+    if (res.statusCode == 200) {
+      final data = jsonDecode(res.body);
+      final map = data is Map ? (data['data'] ?? data) as Map<String, dynamic> : <String, dynamic>{};
+      return Restaurant.fromJson(map);
+    }
+    throw Exception('Restaurante (${ApiConfig.environment}): HTTP ${res.statusCode}');
+  }
+
+  Future<MenuData> fetchMenu(String slug) async {
+    final res = await _http.get(Uri.parse('${ApiConfig.baseUrl}${ApiConfig.restaurantsPath}/$slug/menu'));
+    if (res.statusCode == 200) {
+      final data = jsonDecode(res.body);
+      final map = data is Map ? (data['data'] ?? data) as Map<String, dynamic> : <String, dynamic>{};
+      return MenuData.fromJson(map);
+    }
+    throw Exception('Menú (${ApiConfig.environment}): HTTP ${res.statusCode}');
   }
 
   Future<Product?> fetchProduct(String id) async {
