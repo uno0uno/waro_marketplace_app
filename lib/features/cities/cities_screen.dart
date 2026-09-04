@@ -33,17 +33,29 @@ class CitiesScreen extends ConsumerWidget {
         error: (e, _) => Center(child: Text('Error (${ApiConfig.environment}): $e')),
         data: (cities) => cities.isEmpty
             ? Center(child: Text('Sin ciudades (${ApiConfig.environment})'))
-            : ListView.separated(
+            : ListView.builder(
+                padding: const EdgeInsets.all(12),
                 itemCount: cities.length,
-                separatorBuilder: (_, __) => const Divider(height: 1),
-                itemBuilder: (_, i) => ListTile(
-                  leading: const Icon(Icons.location_on_outlined),
-                  title: Text(cities[i].name),
-                  subtitle: Text(cities[i].slug),
-                  trailing: Text('${cities[i].tenantCount}'),
-                  onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (_) => CityRestaurantsScreen(city: cities[i])),
+                itemBuilder: (_, i) => Card(
+                  clipBehavior: Clip.antiAlias,
+                  child: ListTile(
+                    leading: const Icon(Icons.location_on_outlined),
+                    title: Text(cities[i].name,
+                        style: const TextStyle(fontWeight: FontWeight.w600)),
+                    subtitle: Text(cities[i].slug),
+                    trailing: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      decoration: BoxDecoration(
+                        color: Colors.black.withValues(alpha: 0.55),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Text('${cities[i].tenantCount}',
+                          style: const TextStyle(fontSize: 11, color: Colors.white)),
+                    ),
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => CityRestaurantsScreen(city: cities[i])),
+                    ),
                   ),
                 ),
               ),
