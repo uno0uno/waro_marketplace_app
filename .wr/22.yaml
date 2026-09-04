@@ -1,0 +1,38 @@
+issue: 22
+title: "feat(restaurant): open profile with menu on tap"
+repo: waro_marketplace_app
+repo_remote: uno0uno/waro_marketplace_app
+cwd: /Users/saifer/Documents/WEBS/waro_marketplace_app
+stack: flutter
+branch: wr-22-restaurant-detail
+
+paths:
+  - lib/data/api_client.dart
+  - lib/data/models/menu_data.dart
+  - lib/features/restaurant/restaurant_detail_screen.dart
+  - lib/widgets/restaurant_card.dart
+  - lib/features/cities/city_restaurants_screen.dart
+
+ac:
+  - Tap en card abre perfil con info y menu por categorias
+  - GET /{slug} + /{slug}/menu en paralelo del entorno activo
+  - Estados loading, error con entorno y reintentar, menu vacio
+  - Sin regresion en ciudades, lista restaurantes, nav, login
+
+out_of_scope:
+  - carrito, pedidos, mesa, checkout, filtros de menu, cambios API y front_nuxt
+
+hints:
+  entry: "RestaurantCard.onTap -> RestaurantDetailScreen"
+  pattern: "front_nuxt [tenant]/index.vue:60-68 + api public_restaurant.py:151,194"
+  tests: "flutter analyze + flutter test"
+
+risk:
+  sensitive: false
+  areas: []
+
+skip:
+  audits: []
+
+next:
+  after_pr: "/wr-fast #22 review"

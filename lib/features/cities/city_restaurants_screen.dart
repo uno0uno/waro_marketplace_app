@@ -6,6 +6,7 @@ import '../../data/models/restaurant.dart';
 import '../../widgets/app_header.dart';
 import '../../widgets/app_bottom_nav.dart';
 import '../../widgets/restaurant_card.dart';
+import '../restaurant/restaurant_detail_screen.dart';
 import '../feed/feed_screen.dart';
 import 'cities_screen.dart';
 
@@ -82,7 +83,13 @@ class CityRestaurantsScreen extends ConsumerWidget {
               final r = sorted[i - 1];
               return Padding(
                 padding: const EdgeInsets.only(top: 12),
-                child: RestaurantCard(restaurant: r),
+                child: RestaurantCard(
+                  restaurant: r,
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => RestaurantDetailScreen(restaurant: r)),
+                  ),
+                ),
               );
             },
           );
