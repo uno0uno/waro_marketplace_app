@@ -1,0 +1,38 @@
+issue: 18
+title: "feat(cities): open city restaurants on tap"
+repo: waro_marketplace_app
+repo_remote: uno0uno/waro_marketplace_app
+cwd: /Users/saifer/Documents/WEBS/waro_marketplace_app
+stack: flutter
+branch: wr-18-city-restaurants
+
+paths:
+  - lib/core/config/api_config.dart
+  - lib/data/api_client.dart
+  - lib/data/models/restaurant.dart
+  - lib/features/cities/city_restaurants_screen.dart
+  - lib/features/cities/cities_screen.dart
+
+ac:
+  - Tap en ciudad abre CityRestaurantsScreen con titulo, conteo y lista
+  - Datos de GET {baseUrl}/public/restaurant/list?city_slug del entorno activo
+  - Estados loading, vacio y error con etiqueta de entorno y reintentar
+  - Sin regresion en listado ciudades, nav, entorno local/prod, login
+
+out_of_scope:
+  - detalle restaurante, filtros, mapa, favoritos, cambios API y front_nuxt
+
+hints:
+  entry: "ListTile.onTap -> CityRestaurantsScreen(city)"
+  pattern: "front_nuxt DirectoryView.vue:56-64 + api public_restaurant.py:46-78"
+  tests: "flutter analyze + flutter test"
+
+risk:
+  sensitive: false
+  areas: []
+
+skip:
+  audits: []
+
+next:
+  after_pr: "/wr-fast #18 review"
