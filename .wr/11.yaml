@@ -1,0 +1,28 @@
+issue: 11
+title: "feat(cities): cities → tenants → products read-only flow from public API"
+repo: waro_marketplace_app
+repo_remote: uno0uno/waro_marketplace_app
+cwd: /Users/saifer/Documents/WEBS/waro_marketplace_app
+stack: flutter
+branch: wr-11-cities-flow
+paths:
+  - lib/data/models/catalog.dart
+  - lib/data/api_client.dart
+  - lib/features/cities/cities_screen.dart
+  - lib/features/cities/widgets/tenants_screen.dart
+  - lib/features/cities/widgets/tenant_detail_screen.dart
+  - lib/main.dart
+ac:
+  - cities screen lista /public/restaurant/cities con loading/error/empty
+  - tenants por city_slug, detalle tenant con /{slug} + /menu
+  - sin mocks; reutiliza RestaurantCard/Header/PublicProductCard
+  - flutter analyze sin errores
+out_of_scope:
+  - carrito/checkout, modifiers compra
+hints:
+  entry: "lib/features/cities/cities_screen.dart"
+  pattern: "front_nuxt/pages/ciudades/index.vue + DirectoryView.vue; api_warocol.com/app/routers/public_restaurant.py"
+  tests: "flutter analyze; flutter test"
+risk: { sensitive: false, areas: [] }
+skip: { audits: [] }
+next: { after_pr: "gh issue edit 11 --add-label ready-for-review" }
