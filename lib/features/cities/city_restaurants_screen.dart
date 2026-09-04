@@ -5,6 +5,7 @@ import '../../data/models/city.dart';
 import '../../data/models/restaurant.dart';
 import '../../widgets/app_header.dart';
 import '../../widgets/app_bottom_nav.dart';
+import '../../widgets/restaurant_card.dart';
 import '../feed/feed_screen.dart';
 import 'cities_screen.dart';
 
@@ -57,28 +58,35 @@ class CityRestaurantsScreen extends ConsumerWidget {
             ],
           ),
         ),
-        data: (restaurants) => restaurants.isEmpty
-            ? Center(child: Text('Sin restaurantes en ${city.name} (${ApiConfig.environment})'))
-            : ListView(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Text(
-                      'Restaurantes en ${city.name} (${restaurants.length})',
-                      style: Theme.of(context).textTheme.titleLarge,
-                    ),
+        data: (restaurants) {
+          if (restaurants.isEmpty) {
+            return Center(child: Text('Sin restaurantes en ${city.name} (${ApiConfig.environment})'));
+          }
+          final sorted = [...restaurants]..sort((a, b) {
+              if (a.isOpen == b.isOpen) return a.displayName.compareTo(b.displayName);
+              return a.isOpen ? -1 : 1;
+            });
+          return ListView.builder(
+            padding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
+            itemCount: sorted.length + 1,
+            itemBuilder: (_, i) {
+              if (i == 0) {
+                return Padding(
+                  padding: const EdgeInsets.all(4),
+                  child: Text(
+                    'Restaurantes en ${city.name} (${sorted.length})',
+                    style: Theme.of(context).textTheme.titleLarge,
                   ),
-                  ...restaurants.map(
-                    (r) => ListTile(
-                      leading: r.logoUrl != null
-                          ? CircleAvatar(backgroundImage: NetworkImage(r.logoUrl!))
-                          : const CircleAvatar(child: Icon(Icons.restaurant_outlined)),
-                      title: Text(r.displayName),
-                      subtitle: Text(r.isOpen ? 'Abierto' : 'Cerrado'),
-                    ),
-                  ),
-                ],
-              ),
+                );
+              }
+              final r = sorted[i - 1];
+              return Padding(
+                padding: const EdgeInsets.only(top: 12),
+                child: RestaurantCard(restaurant: r),
+              );
+            },
+          );
+        },
       ),
     );
   }

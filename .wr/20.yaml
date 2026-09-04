@@ -1,0 +1,37 @@
+issue: 20
+title: "feat(cities): restaurant cards with open status parity front_nuxt"
+repo: waro_marketplace_app
+repo_remote: uno0uno/waro_marketplace_app
+cwd: /Users/saifer/Documents/WEBS/waro_marketplace_app
+stack: flutter
+branch: wr-20-restaurant-cards
+
+paths:
+  - lib/data/models/restaurant.dart
+  - lib/widgets/restaurant_card.dart
+  - lib/features/cities/city_restaurants_screen.dart
+  - lib/features/cities/cities_screen.dart
+
+ac:
+  - Card con foto banner>logo>placeholder, badges barrio y apertura, body y CTA
+  - Apertura por public_ordering_status == open con fallback is_currently_open
+  - Abiertos primero, ciudades con misma base card
+  - Sin regresion en nav, entorno local/prod, login
+
+out_of_scope:
+  - detalle restaurante, pedidos, filtros, mapa, cambios API y front_nuxt
+
+hints:
+  entry: "RestaurantCard + CityRestaurantsScreen list"
+  pattern: "front_nuxt DirectoryView.vue:69-72,157-231"
+  tests: "flutter analyze + flutter test"
+
+risk:
+  sensitive: false
+  areas: []
+
+skip:
+  audits: []
+
+next:
+  after_pr: "/wr-fast #20 review"
