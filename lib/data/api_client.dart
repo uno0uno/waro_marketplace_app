@@ -20,9 +20,11 @@ class ApiClient {
     return Product.mock();
   }
 
-  Future<List<City>> fetchCities({String countryCode = 'CO'}) async {
-    final uri = Uri.parse('${ApiConfig.baseUrl}${ApiConfig.citiesPath}')
-        .replace(queryParameters: {'country_code': countryCode, 'include_empty': 'true'});
+  Future<List<City>> fetchCities({String countryCode = 'CO', bool includeEmpty = false}) async {
+    final uri = Uri.parse('${ApiConfig.baseUrl}${ApiConfig.citiesPath}').replace(queryParameters: {
+      'country_code': countryCode,
+      'include_empty': includeEmpty ? 'true' : 'false',
+    });
     final res = await _http.get(uri);
     if (res.statusCode == 200) {
       final data = jsonDecode(res.body);
