@@ -6,6 +6,9 @@ class Product {
   final String? imageUrl;
   final String? tenantName;
   final List<ModifierGroup> modifierGroups;
+  final bool hasModifiers;
+  final bool isAvailable;
+  final int? preparationTime;
 
   Product({
     required this.id,
@@ -15,6 +18,9 @@ class Product {
     this.imageUrl,
     this.tenantName,
     this.modifierGroups = const [],
+    this.hasModifiers = false,
+    this.isAvailable = true,
+    this.preparationTime,
   });
 
   factory Product.fromJson(Map<String, dynamic> j) => Product(
@@ -28,6 +34,9 @@ class Product {
                 ?.map((e) => ModifierGroup.fromJson(e))
                 .toList() ??
             [],
+        hasModifiers: j['has_modifiers'] == true || (j['modifier_groups'] as List?)?.isNotEmpty == true,
+        isAvailable: j['is_available'] != false && j['isAvailable'] != false,
+        preparationTime: (j['preparation_time'] ?? j['preparationTime']) as int?,
       );
 
   static List<Product> mock() => [

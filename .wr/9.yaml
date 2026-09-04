@@ -1,0 +1,26 @@
+issue: 9
+title: "feat(cards): cards fieles a waro colombia con modificadores + auth + api real sin mock"
+repo: waro_marketplace_app
+repo_remote: uno0uno/waro_marketplace_app
+cwd: /Users/saifer/Documents/WEBS/waro_marketplace_app
+stack: flutter
+branch: wr-9-cards-auth-real
+paths:
+  - lib/data/models/product.dart
+  - lib/data/api_client.dart
+  - lib/core/config/api_config.dart
+  - lib/features/restaurant/widgets/public_product_card.dart
+  - lib/features/feed/feed_screen.dart
+ac:
+  - cards idénticas a waro colombia con modificadores visibles
+  - api real autenticada sin mock fallback
+  - AppColors respetados
+  - flutter analyze sin errores
+out_of_scope: []
+hints:
+  entry: "lib/features/feed/feed_screen.dart"
+  pattern: "front_nuxt/components/public/PublicProductCard.vue"
+  tests: "flutter analyze; flutter test"
+risk: { sensitive: false, areas: [] }
+skip: { audits: [] }
+next: { after_pr: "gh issue edit 9 --add-label ready-for-review" }
