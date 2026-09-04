@@ -4,6 +4,7 @@ import '../../core/config/api_config.dart';
 import '../../data/models/city.dart';
 import '../../widgets/app_header.dart';
 import '../../widgets/app_bottom_nav.dart';
+import '../../widgets/matrix_loader.dart';
 import '../feed/feed_screen.dart';
 import 'city_restaurants_screen.dart';
 
@@ -29,7 +30,7 @@ class CitiesScreen extends ConsumerWidget {
       appBar: AppHeader(onCitiesTap: () {}),
       bottomNavigationBar: AppBottomNav(currentIndex: 1, onTap: (i) => _onNavTap(context, i)),
       body: async.when(
-        loading: () => const Center(child: CircularProgressIndicator()),
+        loading: () => const MatrixLoader(),
         error: (e, _) => Center(child: Text('Error (${ApiConfig.environment}): $e')),
         data: (cities) => cities.isEmpty
             ? Center(child: Text('Sin ciudades (${ApiConfig.environment})'))

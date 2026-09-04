@@ -31,7 +31,10 @@ class RestaurantCard extends StatelessWidget {
                   aspectRatio: 16 / 9,
                   child: photoUrl != null
                       ? Image.network(photoUrl, fit: BoxFit.cover,
-                          errorBuilder: (_, __, ___) => const _Placeholder())
+                          errorBuilder: (_, Object err, ___) {
+                            debugPrint('RestaurantCard image failed (${r.slug}): $err');
+                            return const _Placeholder(isError: true);
+                          })
                       : const _Placeholder(),
                 ),
                 Positioned.fill(
@@ -115,12 +118,17 @@ class RestaurantCard extends StatelessWidget {
 }
 
 class _Placeholder extends StatelessWidget {
-  const _Placeholder();
+  final bool isError;
+  const _Placeholder({this.isError = false});
   @override
   Widget build(BuildContext context) {
     return Container(
       color: AppColors.titan200,
-      child: const Center(child: Text('🍽️', style: TextStyle(fontSize: 40))),
+      child: Center(
+        child: isError
+            ? const Icon(Icons.broken_image_outlined, size: 40, color: AppColors.ebony500)
+            : const Text('🍽️', style: TextStyle(fontSize: 40)),
+      ),
     );
   }
 }
