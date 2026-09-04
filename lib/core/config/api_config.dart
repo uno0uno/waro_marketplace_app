@@ -10,6 +10,7 @@ class ApiConfig {
           ? 'local'
           : 'prod';
   static const String productsPath = '/products';
+  static const String citiesPath = '/public/restaurant/cities';
   static String productDetail(String id) => '/products/$id';
   static String waroColProductUrl(String id) => 'https://warocol.com/product/$id';
 }

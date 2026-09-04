@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../core/config/api_config.dart';
+import 'models/city.dart';
 import 'models/product.dart';
 
 class ApiClient {
@@ -17,6 +18,18 @@ class ApiClient {
       }
     } catch (_) {}
     return Product.mock();
+  }
+
+  Future<List<City>> fetchCities({String countryCode = 'CO'}) async {
+    final uri = Uri.parse('${ApiConfig.baseUrl}${ApiConfig.citiesPath}')
+        .replace(queryParameters: {'country_code': countryCode, 'include_empty': 'true'});
+    final res = await _http.get(uri);
+    if (res.statusCode == 200) {
+      final data = jsonDecode(res.body);
+      final list = data is List ? data : (data['data'] as List? ?? []);
+      return list.map((e) => City.fromJson(e as Map<String, dynamic>)).toList();
+    }
+    throw Exception('Ciudades (${ApiConfig.environment}): HTTP ${res.statusCode}');
   }
 
   Future<Product?> fetchProduct(String id) async {

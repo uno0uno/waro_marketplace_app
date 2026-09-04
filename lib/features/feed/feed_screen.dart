@@ -7,6 +7,7 @@ import '../../widgets/app_header.dart';
 import '../../widgets/app_footer.dart';
 import '../../widgets/app_bottom_nav.dart';
 import '../product/product_detail_screen.dart';
+import '../cities/cities_screen.dart';
 
 final apiClientProvider = Provider((ref) => ApiClient());
 final productsProvider = FutureProvider<List<Product>>((ref) => ref.watch(apiClientProvider).fetchProducts());
@@ -19,8 +20,19 @@ class FeedScreen extends ConsumerWidget {
     final async = ref.watch(productsProvider);
     final isMobile = MediaQuery.of(context).size.width < 768;
     return Scaffold(
-      appBar: const AppHeader(),
-      bottomNavigationBar: const AppBottomNav(currentIndex: 0),
+      appBar: AppHeader(
+        onCitiesTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (_) => const CitiesScreen()));
+        },
+      ),
+      bottomNavigationBar: AppBottomNav(
+        currentIndex: 0,
+        onTap: (i) {
+          if (i == 1) {
+            Navigator.push(context, MaterialPageRoute(builder: (_) => const CitiesScreen()));
+          }
+        },
+      ),
       body: async.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (e, _) => Center(child: Text('Error: $e')),

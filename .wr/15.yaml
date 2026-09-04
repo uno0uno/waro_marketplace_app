@@ -1,0 +1,40 @@
+issue: 15
+title: "feat(cities): open cities list bound to active API env"
+repo: waro_marketplace_app
+repo_remote: uno0uno/waro_marketplace_app
+cwd: /Users/saifer/Documents/WEBS/waro_marketplace_app
+stack: flutter
+branch: wr-15-cities-env
+
+paths:
+  - lib/core/config/api_config.dart
+  - lib/data/models/city.dart
+  - lib/data/api_client.dart
+  - lib/features/cities/cities_screen.dart
+  - lib/widgets/app_bottom_nav.dart
+  - lib/widgets/app_header.dart
+  - lib/features/feed/feed_screen.dart
+
+ac:
+  - Tap en 'Ciudades' navega a CitiesScreen con listado real
+  - Datos de GET {baseUrl}/public/restaurant/cities del entorno activo
+  - Vacio/error muestran etiqueta de entorno
+  - Sin regresion en nav, productos, footer, login
+
+out_of_scope:
+  - detalle ciudad, mapa, filtros, CRUD, cambios API
+
+hints:
+  entry: "FeedScreen bottom nav idx 1 + header Ciudades"
+  pattern: "front_nuxt pages/ciudades/[cc]/[city].vue:32 + nuxt.config.ts:139-161"
+  tests: "flutter analyze + flutter test"
+
+risk:
+  sensitive: false
+  areas: []
+
+skip:
+  audits: []
+
+next:
+  after_pr: "/wr-fast #15 review"
