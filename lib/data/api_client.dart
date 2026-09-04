@@ -49,7 +49,7 @@ class ApiClient {
   }
 
   Future<Restaurant> fetchProfile(String slug) async {
-    final res = await _http.get(Uri.parse('${ApiConfig.baseUrl}${ApiConfig.restaurantsPath}/$slug'));
+    final res = await _http.get(Uri.parse('${ApiConfig.baseUrl}/public/restaurant/$slug'));
     if (res.statusCode == 200) {
       final data = jsonDecode(res.body);
       final map = data is Map ? (data['data'] ?? data) as Map<String, dynamic> : <String, dynamic>{};
@@ -59,7 +59,7 @@ class ApiClient {
   }
 
   Future<MenuData> fetchMenu(String slug) async {
-    final res = await _http.get(Uri.parse('${ApiConfig.baseUrl}${ApiConfig.restaurantsPath}/$slug/menu'));
+    final res = await _http.get(Uri.parse('${ApiConfig.baseUrl}/public/restaurant/$slug/menu'));
     if (res.statusCode == 200) {
       final data = jsonDecode(res.body);
       final map = data is Map ? (data['data'] ?? data) as Map<String, dynamic> : <String, dynamic>{};
